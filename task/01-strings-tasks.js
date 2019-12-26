@@ -68,8 +68,9 @@ console.log(getStringFromTemplate('John', 'Doe'));
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 var value = 'Hello, John Doe!';
+
 function extractNameFromTemplate(value) {
-  return value.slice(7).slice(0, - 1);
+  return value.slice(7).slice(0, -1);
 }
 console.log(extractNameFromTemplate(value));
 
@@ -238,10 +239,9 @@ function encodeToRot13(str) {
   );
   encodeToRot13.lookup = encodeToRot13.input.reduce(
     (m, k, i) =>
-      Object.assign(m, {
-        [k]: encodeToRot13.output[i]
-      }),
-    {}
+    Object.assign(m, {
+      [k]: encodeToRot13.output[i]
+    }), {}
   );
   return str
     .split("")
@@ -263,7 +263,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-  return typeof value === 'string';
+  return (typeof value == 'string');
 }
 console.log(isString('test'));
 

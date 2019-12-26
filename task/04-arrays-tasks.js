@@ -22,7 +22,7 @@
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
 function findElement(arr, value) {
-    return arr[value] ? arr[value] : -1;
+    return arr.indexOf(value) ? arr.indexOf(value) : -1;
 }
 
 /**
@@ -92,8 +92,13 @@ function getArrayOfPositives(arr) {
  *    [ 'cat, 'dog', 'raccon' ] => [ 'cat', 'dog', 'racoon' ]
  */
 function getArrayOfStrings(arr) {
-    return arr.filter(arrItem => typeof arrItem === "String" && arrItem !== "");
+    return arr.filter((arrItem) => {
+        return typeof arrItem == 'string'
+    });
 }
+console.log(getArrayOfStrings([0, 1, 'cat', 3, true, 'dog']));
+console.log(getArrayOfStrings([1, 2, 3, 4, 5]));
+
 
 /**
  * Removes falsy values from the specified array
@@ -186,7 +191,7 @@ function getHead(arr, n) {
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'b', 'c', 'd' ]
  */
 function getTail(arr, n) {
-    arr.slice(-n);
+    arr.shift(n);
 }
 
 /**
@@ -211,10 +216,15 @@ function getTail(arr, n) {
  */
 function toCsvText(arr) {
     var masStr = [];
-    for (var i = 0; i < arr.size(); i++) {
-        masStr.add(string.join(arr[i], ","));
-    }
-    return String.join(masStr, "\n");
+    arr.map((arrItem) => {
+        return masStr.add(String.join(arrItem, ','))
+    });
+    return String.join(masStr, "\n")
+
+    // for (var i = 0; i < arr.length; i++) {
+    //     masStr.add(string.join(arr[i], ","));
+    // }
+    // return String.join(masStr, "\n");
 }
 
 /**
@@ -229,12 +239,9 @@ function toCsvText(arr) {
  *   [ 10, 100, -1 ]      => [ 100, 10000, 1 ]
  */
 function toArrayOfSquares(arr) {
-    var newArr = [];
-    for (let index = 1; index <= arr.length; index++) {
-        newArr.push(arr.slice(0, index).reduce((a, b) => a + b, 0));
-    }
-    return newArr;
+    return arr.map((arrItem) => Math.pow(arrItem, 2));;
 }
+console.log(toArrayOfSquares([0, 1, 2, 3, 4, 5]));
 
 /**
  * Transforms the numeric array to the according moving sum array:
@@ -253,7 +260,7 @@ function toArrayOfSquares(arr) {
 function getMovingSum(arr) {
     var movingSumList = [];
     movingSumList.push(arr[0]);
-    for (var i = 0; i < arr.size() - 1; i++) {
+    for (var i = 0; i < arr.length - 1; i++) {
         var sum = movingSumList[i] + arr[i + 1];
         movingSumList.push(sum);
     }
@@ -317,14 +324,22 @@ function propagateItemsByPositionIndex(arr) {
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
 function get3TopItems(arr) {
+
     var newArr = [];
+    arr.filter((arrItem) => {
+        return arrItem == Math.max.apply(arr)
+    })
     for (let count = 1; count <= 3; count++) {
         newArr.push(Math.max.apply(null, arr));
         var index = arr.indexOf(Math.max.apply(null, arr));
-        if (index !== -1) arr.splice(index, 1);
+        if (index != -1) arr.splice(index, 1);
     }
     return newArr;
 }
+console.log([1, 2, 3].filter(arrItem => {
+    return arrItem == Math.max.apply[1, 2, 3]
+}));
+
 
 /**
  * Returns the number of positive numbers from specified array
@@ -340,9 +355,9 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-    return arr.filter(arrItem => {
+    return arr.filter((arrItem) => {
         return arrItem > 0;
-    });
+    }).length;
 }
 
 /**
@@ -375,13 +390,18 @@ function sortDigitNamesByNumericOrder(arr) {
         eight: 8,
         nine: 9
     };
-    var nums = [];
-    for (const arrItem of arr) {
-        nums.push(numbers[arrItem]);
-    }
-    return nums.sort(function (a, b) {
-        return a - b
-    });
+    // const nums = (...args) => {
+    //     return arr.
+    // }
+    // arr.forEach((arrItem) => nums[arrItem] = 
+    // } = numbers));
+
+    // for (const arrItem of arr) {
+    //     nums.push(numbers[arrItem]);
+    // }
+    // return nums.sort(function (a, b) {
+    //     return a - b
+    // });
 }
 
 /**
@@ -413,8 +433,9 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-    return arr.filter(Boolean);
+    return arr.filter(Boolean).length;
 }
+console.log(getFalsyValuesCount([]));
 
 /**
  * Returns a number of all occurences of the specified item in an array
@@ -431,16 +452,13 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-    // function getPositivesCount(arr) {
-    //     return arr.filter(arrItem => {
-    //         return arrItem > 0;
-    //     });
-    // }
-    var newArr = [];
-    for (const arrItem of arr) {
-        newArr.push(arrItem === item);
-    }
+
+    return arr.filter(function (arrItem) {
+        return arrItem == item;
+    }).length;
 }
+console.log(findAllOccurences([null, null, null], null));
+
 
 /**
  * Concatenates all elements from specified array into single string with ',' delimeter

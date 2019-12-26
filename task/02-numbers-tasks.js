@@ -54,7 +54,7 @@ function getCicleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-    return (value1 + value2) / 2;
+    return ((value1 + value2) / 2);
 }
 
 /**
@@ -73,8 +73,11 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-    return Math.sqrt(Math.pow(x2 - x1), 2) + Math.pow((y2 - y1), 2);
+    return Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
 }
+console.log(getDistanceBetweenPoints(0, 0, 0, 1));
+console.log(getDistanceBetweenPoints(0, 0, 1, 0));
+console.log(getDistanceBetweenPoints(-5, 0, 10, -10));
 
 /**
  * Returns a root of linear equation a*x + b = 0 given by coefficients a and b.
@@ -143,7 +146,7 @@ function getLastDigit(value) {
  * '-525.5'     => -525.5
  */
 function parseNumberFromString(value) {
-    return value.parseFloat();
+    return Number.parseFloat(value);
 }
 
 /**
@@ -227,7 +230,7 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-    return value.parseInt ? value : def;
+    return Number.parseInt(value) ? value : def;
 }
 
 module.exports = {

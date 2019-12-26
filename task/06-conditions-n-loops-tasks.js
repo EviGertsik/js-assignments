@@ -30,8 +30,34 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    if (num % 5 == 0 && num % 3 == 0) {
+        return 'FizzBuzz';
+    } else if (num % 5 == 0) {
+        return 'Buzz';
+    } else if (num % 3 == 0) {
+        return 'Fizz';
+    } else {
+        return num;
+    }
+
+    // var result;
+    // switch (num) {
+    //     case num % 5 == 0 && num % 3 == 0:
+    //         result = 'FizzBuzz';
+    //         break;
+    //     case num % 5 == 0:
+    //         result = 'Buzz';
+    //         break;
+    //     case num % 3 == 0:
+    //         result = 'Fizz';
+    //         break;
+    //     default:
+    //         result = num;
+    // }
+    // return result;
 }
+console.log(getFizzBuzz(21));
+
 
 
 /**
@@ -46,7 +72,15 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    let factorial = 1;
+    if (n == 0 || n == 1) {
+        return 1;
+    } else {
+        for (let i = 1; i <= n; i++) {
+            factorial *= i;
+        }
+    }
+    return factorial;
 }
 
 
@@ -63,7 +97,11 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+    let sumBetweenNumbers = 0;
+    for (let i = n1; i <= n2; i++) {
+        sumBetweenNumbers += i;
+    }
+    return sumBetweenNumbers;
 }
 
 
@@ -81,8 +119,8 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+    return (a + c > b && a + b > c && b + c > a);
 }
 
 
@@ -119,7 +157,15 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
+    let doRectnaglesOverlap = false;
+    if (rect1.left < rect2.getleft + rect2.width && // является ли левый верхний угол (ЛВУ) прямоугольника № 1 меньше длины верхней грани прямоугольника №2
+        rect1.left + rect1.width > rect2.left && // является ли длина верхней грани №1 больше стартовой точки по оси абсцисс прямоугольника №2
+        rect1.top < rect2.top + rect2.height && // является ли координата оси оординат прямоугольника №1 меньше длины боковой грани прямоугольника №2
+        rect1.top + rect1.height > rect2.top) // является ли длина боковой грани прямоугольника №1 больше координаты по оси ооридант прямоугольника №2 (ЛВУ) 
+    {
+        doRectnaglesOverlap = true;
+    }
+    return doRectnaglesOverlap;
 }
 
 
@@ -443,15 +489,15 @@ module.exports = {
     doRectanglesOverlap: doRectanglesOverlap,
     isInsideCircle: isInsideCircle,
     findFirstSingleChar: findFirstSingleChar,
-    getIntervalString : getIntervalString,
+    getIntervalString: getIntervalString,
     reverseString: reverseString,
     reverseInteger: reverseInteger,
     isCreditCardNumber: isCreditCardNumber,
     getDigitalRoot: getDigitalRoot,
     isBracketsBalanced: isBracketsBalanced,
-    timespanToHumanString : timespanToHumanString,
+    timespanToHumanString: timespanToHumanString,
     toNaryString: toNaryString,
     getCommonDirectoryPath: getCommonDirectoryPath,
     getMatrixProduct: getMatrixProduct,
-    evaluateTicTacToePosition : evaluateTicTacToePosition
+    evaluateTicTacToePosition: evaluateTicTacToePosition
 };

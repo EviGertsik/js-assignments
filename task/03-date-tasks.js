@@ -56,12 +56,10 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   var myDate = new Date(date);
-
-   return (myDate.getFullYear() % 4 == 0);
+   return new Date(date.getFullYear(), 1, 29).getDate() === 29;
 }
-var today = new Date(1900, 2, 1);
-console.log(today.getFullYear() % 4 == 0);
+const today = new Date(1900, 3, 1);
+console.log(today.toDateString());
 
 
 /**
@@ -80,8 +78,9 @@ console.log(today.getFullYear() % 4 == 0);
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   throw new Error('Not implemented');
+   return (new Date(endDate - startDate)).toJSON().split('T')[1].slice(0, -1);
 }
+
 
 
 /**
@@ -98,13 +97,21 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-   var hours = new Date(date).getHours() * 6;
-   var minutes = new Date(date).getMinutes() * 30;
-   if (hours >= 180) {
-      return Math.round((hours + minutes) * Math.PI / 180);
-   } else {
-      return Math.round((hours + minutes) * Math.PI / 180);
-   }
+   let minutes = new Date(date).getUTCMinutes();
+   let hours = new Date(date).getUTCHours();
+   if (hours >= 12) hours -= 12;
+   let angle = Math.abs((hours + minutes / 60) * 30 - minutes * 6);
+   if (angle > 180) angle -= 180;
+   let result = Math.PI * angle / 180;
+   return result;
+
+   // let hours = new Date(date).getHours() * 6;
+   // let minutes = new Date(date).getMinutes() * 30;
+   // if (hours >= 180) {
+   //    return Math.round((hours + minutes) * Math.PI / 180);
+   // } else {
+   //    return Math.round((hours + minutes) * Math.PI / 180);
+   // }
 }
 console.log(angleBetweenClockHands());
 
